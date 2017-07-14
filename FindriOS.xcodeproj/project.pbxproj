@@ -13,6 +13,8 @@
 		A6EF75DE1F185E4100DE72CA /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A6EF75DD1F185E4100DE72CA /* Images.xcassets */; };
 		A6EF75E11F185E4100DE72CA /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = A6EF75DF1F185E4100DE72CA /* LaunchScreen.xib */; };
 		A6EF75ED1F185E4100DE72CA /* FindriOSTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6EF75EC1F185E4100DE72CA /* FindriOSTests.swift */; };
+		A6EF75FD1F1880A400DE72CA /* ViewControllerRegister.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6EF75FC1F1880A400DE72CA /* ViewControllerRegister.swift */; };
+		A6EF76011F1899F100DE72CA /* ViewControllerLogIn.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6EF76001F1899F100DE72CA /* ViewControllerLogIn.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -36,6 +38,8 @@
 		A6EF75E61F185E4100DE72CA /* FindriOSTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = FindriOSTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		A6EF75EB1F185E4100DE72CA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		A6EF75EC1F185E4100DE72CA /* FindriOSTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FindriOSTests.swift; sourceTree = "<group>"; };
+		A6EF75FC1F1880A400DE72CA /* ViewControllerRegister.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewControllerRegister.swift; sourceTree = "<group>"; };
+		A6EF76001F1899F100DE72CA /* ViewControllerLogIn.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewControllerLogIn.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -83,6 +87,8 @@
 				A6EF75DD1F185E4100DE72CA /* Images.xcassets */,
 				A6EF75DF1F185E4100DE72CA /* LaunchScreen.xib */,
 				A6EF75D41F185E4100DE72CA /* Supporting Files */,
+				A6EF75FC1F1880A400DE72CA /* ViewControllerRegister.swift */,
+				A6EF76001F1899F100DE72CA /* ViewControllerLogIn.swift */,
 			);
 			path = FindriOS;
 			sourceTree = "<group>";
@@ -212,8 +218,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A6EF76011F1899F100DE72CA /* ViewControllerLogIn.swift in Sources */,
 				A6EF75D91F185E4100DE72CA /* ViewController.swift in Sources */,
 				A6EF75D71F185E4100DE72CA /* AppDelegate.swift in Sources */,
+				A6EF75FD1F1880A400DE72CA /* ViewControllerRegister.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -411,6 +419,7 @@
 				A6EF75F21F185E4100DE72CA /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		A6EF75F31F185E4100DE72CA /* Build configuration list for PBXNativeTarget "FindriOSTests" */ = {
 			isa = XCConfigurationList;
@@ -419,6 +428,7 @@
 				A6EF75F51F185E4100DE72CA /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
