@@ -8,7 +8,7 @@
 
 import UIKit
 
-class FoundViewController: UIViewController {
+class FoundViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -25,6 +25,22 @@ class FoundViewController: UIViewController {
         self.dismissViewControllerAnimated(true, completion: nil);
     }
 
+    @IBOutlet weak var tableView: UITableView!
+    
+    let arr = ["Diary", "Fidget Spinner", "Vape"]
+    
+    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCellWithIdentifier("Cell", forIndexPath: indexPath)
+        cell.textLabel??.text = arr[indexPath.row]
+        return cell as! UITableViewCell
+    }
+    
+    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return arr.count
+    }
+    
+    
+    
     /*
     // MARK: - Navigation
 

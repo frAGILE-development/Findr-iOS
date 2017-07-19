@@ -15,6 +15,7 @@ class LostItem: NSObject, NSCoding {
         static let Description = "description"
         static let Status = "status"
         static let Date = "date"
+        static let Address = "address"
     }
     
     private var _item = "";
@@ -25,13 +26,16 @@ class LostItem: NSObject, NSCoding {
     
     private var _date = "";
     
+    private var _address = "";
+    
     override init() {}
     
-    init(item: String, description: String, status: String, date: String) {
+    init(item: String, description: String, status: String, date: String, address: String) {
         self._item = item;
         self._description = description;
         self._status = status;
         self._date = date;
+        self._address = address;
     }
     
     required init(coder decoder: NSCoder) {
@@ -55,6 +59,11 @@ class LostItem: NSObject, NSCoding {
                 _date = dateObj;
         }
         
+        if let addressObj = decoder.decodeObjectForKey(Keys.Address) as?
+            String {
+                _address = addressObj;
+        }
+        
     }
     
     func encodeWithCoder(coder: NSCoder) {
@@ -62,6 +71,7 @@ class LostItem: NSObject, NSCoding {
         coder.encodeObject(_description, forKey: Keys.Description);
         coder.encodeObject(_description, forKey: Keys.Status);
         coder.encodeObject(_description, forKey: Keys.Date);
+        coder.encodeObject(_description, forKey: Keys.Address);
     }
     
     var Item: String {
@@ -100,7 +110,14 @@ class LostItem: NSObject, NSCoding {
         }
     }
     
-    
+    var Address: String {
+        get {
+            return _address;
+        }
+        set {
+            _address = newValue;
+        }
+    }
     
     
     

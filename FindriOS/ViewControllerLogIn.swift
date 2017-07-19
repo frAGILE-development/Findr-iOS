@@ -32,7 +32,6 @@ class ViewControllerLogIn: UIViewController {
         let storedPassword = NSUserDefaults.standardUserDefaults().stringForKey("password");
         
         if (email == storedEmail) {
-            
             if (password == storedPassword) {
                 NSUserDefaults.standardUserDefaults().setBool(true, forKey: "isLoggedIn");
                 NSUserDefaults.standardUserDefaults().synchronize();
