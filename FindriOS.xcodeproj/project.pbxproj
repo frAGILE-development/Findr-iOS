@@ -11,6 +11,8 @@
 		A631E7461F1D897400594457 /* FoundViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A631E7451F1D897400594457 /* FoundViewController.swift */; };
 		A631E7481F1EAF9F00594457 /* LostItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = A631E7471F1EAF9E00594457 /* LostItem.swift */; };
 		A631E74C1F1F23D200594457 /* EditLostItemController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A631E74B1F1F23D200594457 /* EditLostItemController.swift */; };
+		A631E74E1F21692500594457 /* FoundItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = A631E74D1F21692500594457 /* FoundItem.swift */; };
+		A631E7501F216C8A00594457 /* EditFoundItemController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A631E74F1F216C8A00594457 /* EditFoundItemController.swift */; };
 		A6EF75D71F185E4100DE72CA /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6EF75D61F185E4100DE72CA /* AppDelegate.swift */; };
 		A6EF75D91F185E4100DE72CA /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6EF75D81F185E4100DE72CA /* ViewController.swift */; };
 		A6EF75DC1F185E4100DE72CA /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A6EF75DA1F185E4100DE72CA /* Main.storyboard */; };
@@ -36,6 +38,8 @@
 		A631E7451F1D897400594457 /* FoundViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FoundViewController.swift; sourceTree = "<group>"; };
 		A631E7471F1EAF9E00594457 /* LostItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LostItem.swift; sourceTree = "<group>"; };
 		A631E74B1F1F23D200594457 /* EditLostItemController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditLostItemController.swift; sourceTree = "<group>"; };
+		A631E74D1F21692500594457 /* FoundItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FoundItem.swift; sourceTree = "<group>"; };
+		A631E74F1F216C8A00594457 /* EditFoundItemController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditFoundItemController.swift; sourceTree = "<group>"; };
 		A6EF75D11F185E4100DE72CA /* FindriOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FindriOS.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A6EF75D51F185E4100DE72CA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		A6EF75D61F185E4100DE72CA /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -101,6 +105,8 @@
 				A631E7451F1D897400594457 /* FoundViewController.swift */,
 				A631E7471F1EAF9E00594457 /* LostItem.swift */,
 				A631E74B1F1F23D200594457 /* EditLostItemController.swift */,
+				A631E74D1F21692500594457 /* FoundItem.swift */,
+				A631E74F1F216C8A00594457 /* EditFoundItemController.swift */,
 			);
 			path = FindriOS;
 			sourceTree = "<group>";
@@ -235,9 +241,11 @@
 				A631E74C1F1F23D200594457 /* EditLostItemController.swift in Sources */,
 				A631E7481F1EAF9F00594457 /* LostItem.swift in Sources */,
 				A631E7441F1D896400594457 /* LostViewController.swift in Sources */,
+				A631E74E1F21692500594457 /* FoundItem.swift in Sources */,
 				A6EF75D71F185E4100DE72CA /* AppDelegate.swift in Sources */,
 				A6EF75FD1F1880A400DE72CA /* ViewControllerRegister.swift in Sources */,
 				A631E7461F1D897400594457 /* FoundViewController.swift in Sources */,
+				A631E7501F216C8A00594457 /* EditFoundItemController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

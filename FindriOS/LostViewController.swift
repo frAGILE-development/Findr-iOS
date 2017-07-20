@@ -12,6 +12,7 @@ class LostViewController: UIViewController, UITableViewDataSource, UITableViewDe
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        print(filePath)
         loadData()
     }
 
@@ -26,7 +27,7 @@ class LostViewController: UIViewController, UITableViewDataSource, UITableViewDe
         let manager = NSFileManager.defaultManager();
         let url = manager.URLsForDirectory(.DocumentDirectory, inDomains: .UserDomainMask).first
         
-        var notString =  url!.URLByAppendingPathComponent("Data")
+        var notString =  url!.URLByAppendingPathComponent("Data2")
         var mod = notString.absoluteString!
         var ret = mod.stringByReplacingOccurrencesOfString("file://", withString: "", options: .allZeros, range: nil)
         return ret;
