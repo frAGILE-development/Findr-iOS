@@ -21,9 +21,9 @@ class FoundViewController: UIViewController, UITableViewDataSource, UITableViewD
         // Dispose of any resources that can be recreated.
     }
     
-    @IBAction func onClickBack(sender: AnyObject) {
-        self.dismissViewControllerAnimated(true, completion: nil);
-    }
+//    @IBAction func onClickBack(sender: AnyObject) {
+//        self.dismissViewControllerAnimated(true, completion: nil);
+//    }
 
     @IBOutlet weak var tableView: UITableView!
     

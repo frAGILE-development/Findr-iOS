@@ -8,17 +8,19 @@
 
 import UIKit
 
-class LostViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
-
+class LostViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, UISearchBarDelegate, UISearchDisplayDelegate {
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         loadData()
-        // Do any additional setup after loading the view.
-        //var stringPath = filePath.absoluteString;
-        print (filePath)
     }
+
+    @IBOutlet weak var searchBar: UISearchBar!
     
     var data = [LostItem]();
+    
+    var searchData = [LostItem]()
+    var searching:Bool! = false
     
     var filePath: String {
         let manager = NSFileManager.defaultManager();
@@ -31,7 +33,6 @@ class LostViewController: UIViewController, UITableViewDataSource, UITableViewDe
     }
     
     private func loadData() {
-//        var stringPath = filePath.absoluteString;
         if let ourData = NSKeyedUnarchiver.unarchiveObjectWithFile(filePath) as? [LostItem] {
             data = ourData;
         }
@@ -39,33 +40,64 @@ class LostViewController: UIViewController, UITableViewDataSource, UITableViewDe
     
     private func saveData(item: LostItem) {
         data.append(item);
-        
-//        var stringPath = filePath.absoluteString;
-        
         NSKeyedArchiver.archiveRootObject(data, toFile: filePath);
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
-    
-    @IBAction func onClickBack(sender: AnyObject) {
-        self.dismissViewControllerAnimated(true, completion: nil)
     }
 
     @IBOutlet weak var tableView: UITableView!
     
-//    let arr = ["Pen", "Teddy Bear", "Dog"]
-    
-    
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell: AnyObject = tableView.dequeueReusableCellWithIdentifier("Cell", forIndexPath: indexPath)
-        cell.textLabel??.text = data[indexPath.row].Item
-        cell.detailTextLabel??.text = data[indexPath.row].Date
+        let cell: AnyObject = self.tableView.dequeueReusableCellWithIdentifier("Cell", forIndexPath: indexPath)
+        
+        if searching == true {
+            cell.textLabel??.text = searchData[indexPath.row].Item
+            cell.detailTextLabel??.text = data[indexPath.row].Date
+        } else {
+            cell.textLabel??.text = data[indexPath.row].Item
+            cell.detailTextLabel??.text = data[indexPath.row].Date
+        }
         
         return cell as! UITableViewCell
     }
+    
+    func searchBar(searchBar: UISearchBar, textDidChange searchText: String) {
+        searchData = data.filter({ (text) -> Bool in
+            let tmp: NSString = text.Item
+            let range = tmp.rangeOfString(searchText, options: NSStringCompareOptions.CaseInsensitiveSearch)
+            return range.location != NSNotFound
+        })
+        if (searchData.count == 0) {
+            searching = false
+        } else {
+            searching = true
+        }
+        self.tableView.reloadData()
+    }
+
+    
+    func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {
+        return true;
+    }
+    
+    func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
+        if editingStyle == UITableViewCellEditingStyle.Delete {
+            
+            data.removeAtIndex(indexPath.row);
+            NSKeyedArchiver.archiveRootObject(data, toFile: filePath);
+            tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: UITableViewRowAnimation.Automatic)
+            
+        }
+        
+    }
+    
+    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        var index = tableView.indexPathForSelectedRow()!.row;
+        performSegueWithIdentifier("editLostItem", sender: index)
+    }
+    
     
     @IBAction func addLostItem(sender: AnyObject) {
         
@@ -84,11 +116,7 @@ class LostViewController: UIViewController, UITableViewDataSource, UITableViewDe
         }
         
         let cancel = UIAlertAction(title: "Cancel", style: UIAlertActionStyle.Default, handler: nil)
-        
-//        alert.addTextFieldWithConfigurationHandler(nil)
-//        alert.addTextFieldWithConfigurationHandler(nil)
-//        alert.addTextFieldWithConfigurationHandler(nil)
-//        alert.addTextFieldWithConfigurationHandler(nil)
+
         
         alert.addTextFieldWithConfigurationHandler { (text: UITextField!) in
             text.placeholder = "Item"
@@ -113,17 +141,35 @@ class LostViewController: UIViewController, UITableViewDataSource, UITableViewDe
     }
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return data.count
+        
+        if searching! == true {
+            return searchData.count
+        } else {
+            return data.count
+        }
     }
     
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
+    
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+        if segue.identifier == "editLostItem" {
+            
+            if let destination = segue.destinationViewController as? EditLostItemController {
+                
+                if searching == true {
+                    destination.item = searchData[tableView.indexPathForSelectedRow()!.row].Item
+                    destination.descr = searchData[tableView.indexPathForSelectedRow()!.row].Description
+                    destination.date = searchData[tableView.indexPathForSelectedRow()!.row].Date
+                    destination.loc = searchData[tableView.indexPathForSelectedRow()!.row].Address
+                } else {
+                    destination.item = data[tableView.indexPathForSelectedRow()!.row].Item
+                    destination.descr = data[tableView.indexPathForSelectedRow()!.row].Description
+                    destination.date = data[tableView.indexPathForSelectedRow()!.row].Date
+                    destination.loc = data[tableView.indexPathForSelectedRow()!.row].Address
+                }
+            }
+            
+        }
     }
-    */
+
 
 }

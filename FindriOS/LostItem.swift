@@ -69,9 +69,9 @@ class LostItem: NSObject, NSCoding {
     func encodeWithCoder(coder: NSCoder) {
         coder.encodeObject(_item, forKey: Keys.Item);
         coder.encodeObject(_description, forKey: Keys.Description);
-        coder.encodeObject(_description, forKey: Keys.Status);
-        coder.encodeObject(_description, forKey: Keys.Date);
-        coder.encodeObject(_description, forKey: Keys.Address);
+        coder.encodeObject(_status, forKey: Keys.Status);
+        coder.encodeObject(_date, forKey: Keys.Date);
+        coder.encodeObject(_address, forKey: Keys.Address);
     }
     
     var Item: String {
