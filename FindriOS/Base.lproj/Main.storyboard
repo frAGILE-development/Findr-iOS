@@ -4,6 +4,44 @@
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
     </dependencies>
     <scenes>
+        <!--Map View Controller-->
+        <scene sceneID="fpd-Te-RXH">
+            <objects>
+                <viewController id="2KA-EN-NA4" customClass="MapViewController" customModule="FindriOS" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="Czm-WV-FUO"/>
+                        <viewControllerLayoutGuide type="bottom" id="6KL-pr-fe7"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="qRr-a7-1SU">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <containerView opaque="NO" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="x5z-WP-80p">
+                                <rect key="frame" x="0.0" y="80" width="376" height="447"/>
+                                <connections>
+                                    <segue destination="iST-dx-3Nw" kind="embed" id="VvG-Iu-q01"/>
+                                </connections>
+                            </containerView>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="39b-W1-oGb">
+                                <rect key="frame" x="16" y="28" width="46" height="30"/>
+                                <fontDescription key="fontDescription" style="UICTFontTextStyleSubhead"/>
+                                <state key="normal" title="Back">
+                                    <color key="titleColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <segue destination="NhY-8s-D13" kind="presentation" id="Zdw-5o-jGJ"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina55"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="of6-Bq-Y4Y" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1852" y="-563"/>
+        </scene>
         <!--View Controller-->
         <scene sceneID="yaj-Ea-vXV">
             <objects>
@@ -17,8 +55,8 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Hhb-Ly-WIt">
-                                <rect key="frame" x="155" y="463" width="57" height="30"/>
-                                <fontDescription key="fontDescription" type="system" weight="medium" pointSize="17"/>
+                                <rect key="frame" x="107" y="463" width="152" height="30"/>
+                                <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
                                 <state key="normal" title="Logout">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
@@ -29,7 +67,7 @@
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DvM-4S-YzZ">
                                 <rect key="frame" x="107" y="172" width="152" height="33"/>
-                                <fontDescription key="fontDescription" type="system" weight="medium" pointSize="17"/>
+                                <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
                                 <state key="normal" title="Lost Items">
                                     <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                     <color key="titleShadowColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
@@ -40,13 +78,24 @@
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Moq-EY-Zdh">
                                 <rect key="frame" x="107" y="245" width="152" height="33"/>
-                                <fontDescription key="fontDescription" type="system" weight="medium" pointSize="17"/>
+                                <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
                                 <state key="normal" title=" Found Items">
                                     <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                     <color key="titleShadowColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 </state>
                                 <connections>
                                     <segue destination="L0U-Rk-AsN" kind="presentation" identifier="viewFound" modalTransitionStyle="flipHorizontal" id="uxd-SX-jd1"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="FS0-9M-Ijg">
+                                <rect key="frame" x="107" y="316" width="152" height="30"/>
+                                <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
+                                <state key="normal" title="Map">
+                                    <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="titleShadowColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                </state>
+                                <connections>
+                                    <segue destination="2KA-EN-NA4" kind="presentation" id="SBn-aw-RTn"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -594,8 +643,27 @@
             </objects>
             <point key="canvasLocation" x="934" y="255"/>
         </scene>
+        <!--Map Container View Controller-->
+        <scene sceneID="2ob-F7-MSD">
+            <objects>
+                <viewController automaticallyAdjustsScrollViewInsets="NO" id="iST-dx-3Nw" customClass="MapContainerViewController" customModule="FindriOS" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="V92-oR-iTs"/>
+                        <viewControllerLayoutGuide type="bottom" id="xUt-CM-56Z"/>
+                    </layoutGuides>
+                    <view key="view" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="ian-DC-n0u">
+                        <rect key="frame" x="0.0" y="0.0" width="376" height="447"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <toolbarItems/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="XdH-Ke-Jbs" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2365.5" y="-563.5"/>
+        </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="DCl-A7-J5Y"/>
+        <segue reference="Zdw-5o-jGJ"/>
     </inferredMetricsTieBreakers>
 </document>
