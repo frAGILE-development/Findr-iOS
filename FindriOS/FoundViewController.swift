@@ -12,7 +12,7 @@ class FoundViewController: UIViewController, UITableViewDataSource, UITableViewD
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        print(filePath)
+        //print(filePath)
         loadData()
         // Do any additional setup after loading the view.
     }
@@ -54,7 +54,7 @@ class FoundViewController: UIViewController, UITableViewDataSource, UITableViewD
         let cell = self.tableView.dequeueReusableCellWithIdentifier("Cell2", forIndexPath: indexPath)
         if searching == true {
             cell.textLabel??.text = searchData[indexPath.row].Item
-            cell.detailTextLabel??.text = data[indexPath.row].Date
+            cell.detailTextLabel??.text = searchData[indexPath.row].Date
         } else {
             cell.textLabel??.text = data[indexPath.row].Item
             cell.detailTextLabel??.text = data[indexPath.row].Date
