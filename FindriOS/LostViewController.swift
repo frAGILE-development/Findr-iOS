@@ -12,7 +12,7 @@ class LostViewController: UIViewController, UITableViewDataSource, UITableViewDe
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        print(filePath)
+        //print(filePath)
         loadData()
     }
 
@@ -55,7 +55,7 @@ class LostViewController: UIViewController, UITableViewDataSource, UITableViewDe
         
         if searching == true {
             cell.textLabel??.text = searchData[indexPath.row].Item
-            cell.detailTextLabel??.text = data[indexPath.row].Date
+            cell.detailTextLabel??.text = searchData[indexPath.row].Date
         } else {
             cell.textLabel??.text = data[indexPath.row].Item
             cell.detailTextLabel??.text = data[indexPath.row].Date
