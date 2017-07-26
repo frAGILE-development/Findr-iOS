@@ -10,8 +10,15 @@ import UIKit
 
 class LostViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, UISearchBarDelegate, UISearchDisplayDelegate {
     
+    lazy var lostPlaces = [String:String]()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        if (NSUserDefaults.standardUserDefaults().objectForKey("lostPlaces") == nil) {
+            var lostPlaces = [String: String]()
+        } else {
+            var lostPlaces = NSUserDefaults.standardUserDefaults().objectForKey("lostPlaces")
+        }
         //print(filePath)
         loadData()
     }
@@ -109,6 +116,14 @@ class LostViewController: UIViewController, UITableViewDataSource, UITableViewDe
             let date = ((alert.textFields![2] as! UITextField).text)
             let address = ((alert.textFields![3] as! UITextField).text)
             
+            let lat = (alert.textFields![4] as! UITextField).text
+            let long = ((alert.textFields![5] as! UITextField).text)
+            
+            self.lostPlaces[lat] = long
+
+            NSUserDefaults.standardUserDefaults().setObject(self.lostPlaces, forKey: "lostPlaces")
+            NSUserDefaults.standardUserDefaults().synchronize()
+            
             let newItem = LostItem(item: item, description: descr, status: "Lost", date: date, address: address)
             
             self.saveData(newItem)
@@ -133,6 +148,14 @@ class LostViewController: UIViewController, UITableViewDataSource, UITableViewDe
         
         alert.addTextFieldWithConfigurationHandler { (text: UITextField!) in
             text.placeholder = "Address Where Item was Lost"
+        }
+        
+        alert.addTextFieldWithConfigurationHandler { (text: UITextField!) in
+            text.placeholder = "Latitude Where Item was Lost"
+        }
+        
+        alert.addTextFieldWithConfigurationHandler { (text: UITextField!) in
+            text.placeholder = "Longitude Where Item was Lost"
         }
         
         alert.addAction(save)
