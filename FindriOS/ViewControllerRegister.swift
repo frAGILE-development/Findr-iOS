@@ -9,14 +9,24 @@
 import UIKit
 
 class ViewControllerRegister: UIViewController {
+    
 
     @IBOutlet weak var emailText: UITextField!
     @IBOutlet weak var passwordText: UITextField!
     @IBOutlet weak var repeatPassText: UITextField!
     @IBOutlet weak var phoneText: UITextField!
+    @IBOutlet weak var typeText: UITextField!
+    
+    lazy var emailArr = [String: String]()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        if (NSUserDefaults.standardUserDefaults().objectForKey("emailArr") == nil) {
+            emailArr = [String: String]()
+        } else {
+            emailArr = NSUserDefaults.standardUserDefaults().objectForKey("emailArr") as! [String: String]
+        }
+        
         // Do any additional setup after loading the view.
     }
 
@@ -32,6 +42,7 @@ class ViewControllerRegister: UIViewController {
         let password = passwordText.text;
         let repPass = repeatPassText.text;
         let phone = phoneText.text;
+        let type = typeText.text;
         
         //check if fields empty
         if (email.isEmpty || password.isEmpty || repPass.isEmpty || phone.isEmpty) {
@@ -49,8 +60,12 @@ class ViewControllerRegister: UIViewController {
         }
         
         //store data
-        NSUserDefaults.standardUserDefaults().setObject(email, forKey: "email");
-        NSUserDefaults.standardUserDefaults().setObject(password, forKey: "password");
+        self.emailArr[email] = password
+        NSUserDefaults.standardUserDefaults().setObject(self.emailArr, forKey: "emailArr");
+//        NSUserDefaults.standardUserDefaults().setObject(email, forKey: "email");
+//        NSUserDefaults.standardUserDefaults().setObject(password, forKey: "password");
+//        NSUserDefaults.standardUserDefaults().setObject(phone, forKey: "phone");
+//        NSUserDefaults.standardUserDefaults().setObject(type, forKey: "type");
         NSUserDefaults.standardUserDefaults().synchronize();
         
         //display confirmation
