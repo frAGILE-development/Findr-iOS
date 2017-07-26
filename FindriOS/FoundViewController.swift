@@ -10,12 +10,21 @@ import UIKit
 
 class FoundViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
 
+    lazy var foundPlaces = [String:String]()
+
     override func viewDidLoad() {
         super.viewDidLoad()
+        if (NSUserDefaults.standardUserDefaults().objectForKey("foundPlaces") == nil) {
+            var foundPlaces = [String: String]()
+        } else {
+            var foundPlaces = NSUserDefaults.standardUserDefaults().objectForKey("foundPlaces")
+        }
         //print(filePath)
         loadData()
         // Do any additional setup after loading the view.
     }
+    
+    //var foundPlaces = [String: String]()
     
     var data = [FoundItem]();
     
@@ -105,6 +114,18 @@ class FoundViewController: UIViewController, UITableViewDataSource, UITableViewD
             let date = ((alert.textFields![2] as! UITextField).text)
             let address = ((alert.textFields![3] as! UITextField).text)
             
+            let lat = (alert.textFields![4] as! UITextField).text
+            let long = ((alert.textFields![5] as! UITextField).text)
+            
+            self.foundPlaces[lat] = long
+            
+            NSUserDefaults.standardUserDefaults().setObject(self.foundPlaces, forKey: "foundPlaces")
+            NSUserDefaults.standardUserDefaults().synchronize()
+            
+//            let arr = NSUserDefaults.standardUserDefaults().objectForKey("foundPlaces")
+//            print(arr)
+            
+            
             let newItem = FoundItem(item: item, description: descr, status: "Found", date: date, address: address)
             
             self.saveData(newItem)
@@ -124,11 +145,19 @@ class FoundViewController: UIViewController, UITableViewDataSource, UITableViewD
         }
         
         alert.addTextFieldWithConfigurationHandler { (text: UITextField!) in
-            text.placeholder = "Date Item was Lost"
+            text.placeholder = "Date Item was Found"
         }
         
         alert.addTextFieldWithConfigurationHandler { (text: UITextField!) in
-            text.placeholder = "Address Where Item was Lost"
+            text.placeholder = "Address Where Item was Found"
+        }
+        
+        alert.addTextFieldWithConfigurationHandler { (text: UITextField!) in
+            text.placeholder = "Latitude Where Item was Found"
+        }
+        
+        alert.addTextFieldWithConfigurationHandler { (text: UITextField!) in
+            text.placeholder = "Longitude Where Item was Found"
         }
         
         alert.addAction(save)
