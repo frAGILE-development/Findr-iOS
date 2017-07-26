@@ -14,7 +14,7 @@ class ViewControllerLogIn: UIViewController {
     @IBOutlet weak var passW: UITextField!
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        print(NSUserDefaults.standardUserDefaults().dictionaryForKey("emailArr"))
         // Do any additional setup after loading the view.
     }
 
@@ -28,28 +28,56 @@ class ViewControllerLogIn: UIViewController {
         let email = emailID.text;
         let password = passW.text;
         
-        let storedEmail = NSUserDefaults.standardUserDefaults().stringForKey("email");
-        let storedPassword = NSUserDefaults.standardUserDefaults().stringForKey("password");
-        
-        if (email == storedEmail) {
-            if (password == storedPassword) {
-                NSUserDefaults.standardUserDefaults().setBool(true, forKey: "isLoggedIn");
-                NSUserDefaults.standardUserDefaults().synchronize();
-                
-                let myViewController:ViewController = self.storyboard!.instantiateViewControllerWithIdentifier("ViewController") as! ViewController;
-                
-                let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
-                appDelegate.window?.rootViewController=myViewController
-                
-                appDelegate.window?.makeKeyAndVisible()
-                
-                //self.dismissViewControllerAnimated(true, completion: nil);
-            } else {
-                throwError("Password is incorrect");
-            }
-        } else {
-            throwError("Email is invalid");
+//        let storedEmail = NSUserDefaults.standardUserDefaults().stringForKey("email");
+//        let storedPassword = NSUserDefaults.standardUserDefaults().stringForKey("password");
+//        
+//        if (email == storedEmail && email != "") {
+//            if (password == storedPassword) {
+//                NSUserDefaults.standardUserDefaults().setBool(true, forKey: "isLoggedIn");
+//                NSUserDefaults.standardUserDefaults().synchronize();
+//                
+//                let myViewController:ViewController = self.storyboard!.instantiateViewControllerWithIdentifier("ViewController") as! ViewController;
+//                
+//                let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+//                appDelegate.window?.rootViewController=myViewController
+//                
+//                appDelegate.window?.makeKeyAndVisible()
+//                
+//                //self.dismissViewControllerAnimated(true, completion: nil);
+//            } else {
+//                throwError("Password is incorrect");
+//            }
+//        } else {
+//            throwError("Email is invalid");
+//        }
+        let arr = NSUserDefaults.standardUserDefaults().dictionaryForKey("emailArr")
+        if (arr == nil) {
+            throwError("No Registered Users")
         }
+        var bool = true
+        for (e,p) in arr! {
+            if (email == e as! String) {
+                bool = false
+                if (password == p as! String) {
+                    NSUserDefaults.standardUserDefaults().setBool(true, forKey: "isLoggedIn");
+                    NSUserDefaults.standardUserDefaults().synchronize();
+                    
+                    let myViewController:ViewController = self.storyboard!.instantiateViewControllerWithIdentifier("ViewController") as! ViewController;
+                    
+                    let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+                    appDelegate.window?.rootViewController=myViewController
+                
+                    appDelegate.window?.makeKeyAndVisible()
+                } else {
+                    throwError("Password is incorrect")
+                }
+            }
+        }
+        if (bool) {
+            throwError("E-Mail is invalid")
+        }
+        
+        
     }
 
     //error throwing function
