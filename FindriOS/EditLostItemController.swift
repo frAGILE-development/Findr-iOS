@@ -18,15 +18,23 @@ class EditLostItemController: UIViewController {
     
     @IBOutlet weak var locTxt: UITextView!
     
+    @IBOutlet weak var latTxt: UITextField!
+    
+    @IBOutlet weak var LongTxt: UITextField!
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        print("this is \(index) it is")
         
         //fill values
         itemTxt.text = item;
         descrTxt.text = descr;
         dateTxt.text = date;
         locTxt.text = loc;
+        latTxt.text = lat
+        LongTxt.text = long 
         
         //give borders
         descrTxt.layer.cornerRadius = 5
@@ -45,6 +53,16 @@ class EditLostItemController: UIViewController {
     var descr = ""
     var date = ""
     var loc = ""
+    var lat = ""
+    var long = ""
+    
+    var search = true
+    
+    var index = 0;
+    
+    var data = [LostItem]()
+    
+    var path = ""
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -55,14 +73,48 @@ class EditLostItemController: UIViewController {
         self.dismissViewControllerAnimated(true, completion: nil)
     }
     
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+    @IBAction func onClickEdit(sender: AnyObject) {
+        if (!search) {
+            itemTxt.enabled = true
+            descrTxt.editable = true
+            dateTxt.enabled = true
+            locTxt.editable = true
+            latTxt.enabled = true
+            LongTxt.enabled = true
+        } else {
+            throwError("Cannot Edit while Searching")
+        }
     }
-    */
+    
+    @IBAction func onClickOK(sender: AnyObject) {
+        
+        data[index].Item = itemTxt.text
+        data[index].Description = descrTxt.text
+        data[index].Date = dateTxt.text
+        data[index].Address = locTxt.text
+        data[index].Lat = latTxt.text
+        data[index].Long = LongTxt.text
+        
+        NSKeyedArchiver.archiveRootObject(data, toFile: path);
+        
+        itemTxt.enabled = false
+        descrTxt.editable = false
+        dateTxt.enabled = false
+        locTxt.editable = false
+        latTxt.enabled = false
+        LongTxt.enabled = false
+    }
+    
+    func throwError(userMessage:String) {
+        var alert = UIAlertController(title: "Alert", message: userMessage, preferredStyle: UIAlertControllerStyle.Alert);
+        
+        let Action = UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler: nil);
+        
+        alert.addAction(Action);
+        self.presentViewController(alert, animated: true, completion: nil);
+    }
+    
+    
+    
 
 }
