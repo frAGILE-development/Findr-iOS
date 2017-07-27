@@ -14,6 +14,11 @@ class EditFoundItemController: UIViewController {
     @IBOutlet weak var descrTxt: UITextView!
     @IBOutlet weak var dateTxt: UITextField!
     @IBOutlet weak var locTxt: UITextView!
+    @IBOutlet weak var latTxt: UITextField!
+    @IBOutlet weak var longTxt: UITextField!
+    
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -22,6 +27,8 @@ class EditFoundItemController: UIViewController {
         descrTxt.text = descr;
         dateTxt.text = date;
         locTxt.text = loc;
+        latTxt.text = lat
+        longTxt.text = long
         
         //give borders
         descrTxt.layer.cornerRadius = 5
@@ -40,6 +47,13 @@ class EditFoundItemController: UIViewController {
     var descr = ""
     var date = ""
     var loc = ""
+    var lat = ""
+    var long = ""
+    
+    var path = ""
+    var search = true
+    var data = [FoundItem]()
+    var index = 0
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -49,5 +63,47 @@ class EditFoundItemController: UIViewController {
     @IBAction func onBackClick(sender: AnyObject) {
         self.dismissViewControllerAnimated(true, completion: nil)
     }
+    
+    @IBAction func onClickEdit(sender: AnyObject) {
+        if (!search) {
+            itemTxt.enabled = true
+            descrTxt.editable = true
+            dateTxt.enabled = true
+            locTxt.editable = true
+            latTxt.enabled = true
+            longTxt.enabled = true
+        } else {
+            throwError("Cannot Edit while Searching")
+        }
+    }
+    
+    @IBAction func onClickOK(sender: AnyObject) {
+        data[index].Item = itemTxt.text
+        data[index].Description = descrTxt.text
+        data[index].Date = dateTxt.text
+        data[index].Address = locTxt.text
+        data[index].Lat = latTxt.text
+        data[index].Long = longTxt.text
+        
+        NSKeyedArchiver.archiveRootObject(data, toFile: path);
+        
+        itemTxt.enabled = false
+        descrTxt.editable = false
+        dateTxt.enabled = false
+        locTxt.editable = false
+        latTxt.enabled = false
+        longTxt.enabled = false
+    }
+    
+    func throwError(userMessage:String) {
+        var alert = UIAlertController(title: "Alert", message: userMessage, preferredStyle: UIAlertControllerStyle.Alert);
+        
+        let Action = UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler: nil);
+        
+        alert.addAction(Action);
+        self.presentViewController(alert, animated: true, completion: nil);
+    }
+
+    
     
 }
