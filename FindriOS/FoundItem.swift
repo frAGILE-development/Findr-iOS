@@ -16,6 +16,8 @@ class FoundItem: NSObject, NSCoding {
         static let Status = "status"
         static let Date = "date"
         static let Address = "address"
+        static let Lat = "latitude"
+        static let Long = "longitude"
     }
     
     private var _item = "";
@@ -28,14 +30,20 @@ class FoundItem: NSObject, NSCoding {
     
     private var _address = "";
     
+    private var _lat = "";
+    
+    private var _long = "";
+    
     override init() {}
     
-    init(item: String, description: String, status: String, date: String, address: String) {
+    init(item: String, description: String, status: String, date: String, address: String, lat: String, long: String) {
         self._item = item;
         self._description = description;
         self._status = status;
         self._date = date;
         self._address = address;
+        self._lat = lat;
+        self._long = long;
     }
     
     required init(coder decoder: NSCoder) {
@@ -64,6 +72,16 @@ class FoundItem: NSObject, NSCoding {
                 _address = addressObj;
         }
         
+        if let latObj = decoder.decodeObjectForKey(Keys2.Lat) as?
+            String {
+                _lat = latObj;
+        }
+        
+        if let longObj = decoder.decodeObjectForKey(Keys2.Long) as?
+            String {
+                _long = longObj;
+        }
+        
     }
     
     func encodeWithCoder(coder: NSCoder) {
@@ -72,6 +90,8 @@ class FoundItem: NSObject, NSCoding {
         coder.encodeObject(_status, forKey: Keys2.Status);
         coder.encodeObject(_date, forKey: Keys2.Date);
         coder.encodeObject(_address, forKey: Keys2.Address);
+        coder.encodeObject(_lat, forKey: Keys2.Lat);
+        coder.encodeObject(_long, forKey: Keys2.Long);
     }
     
     var Item: String {
@@ -119,9 +139,23 @@ class FoundItem: NSObject, NSCoding {
         }
     }
     
+    var Lat: String {
+        get {
+            return _lat;
+        }
+        set {
+            _lat = newValue;
+        }
+    }
     
-    
-    
+    var Long: String {
+        get {
+            return _long;
+        }
+        set {
+            _long = newValue;
+        }
+    }
     
     
     
