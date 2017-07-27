@@ -16,6 +16,8 @@ class LostItem: NSObject, NSCoding {
         static let Status = "status"
         static let Date = "date"
         static let Address = "address"
+        static let Lat = "lat"
+        static let Long = "long"
     }
     
     private var _item = "";
@@ -28,14 +30,20 @@ class LostItem: NSObject, NSCoding {
     
     private var _address = "";
     
+    private var _lat = "";
+    
+    private var _long = "";
+    
     override init() {}
     
-    init(item: String, description: String, status: String, date: String, address: String) {
+    init(item: String, description: String, status: String, date: String, address: String, lat: String, long: String) {
         self._item = item;
         self._description = description;
         self._status = status;
         self._date = date;
         self._address = address;
+        self._lat = lat
+        self._long = long
     }
     
     required init(coder decoder: NSCoder) {
@@ -64,6 +72,15 @@ class LostItem: NSObject, NSCoding {
                 _address = addressObj;
         }
         
+        if let latObj = decoder.decodeObjectForKey(Keys.Lat) as?
+            String {
+                _lat = latObj;
+        }
+        
+        if let longObj = decoder.decodeObjectForKey(Keys.Long) as?
+            String {
+                _long = longObj;
+        }
     }
     
     func encodeWithCoder(coder: NSCoder) {
@@ -72,6 +89,8 @@ class LostItem: NSObject, NSCoding {
         coder.encodeObject(_status, forKey: Keys.Status);
         coder.encodeObject(_date, forKey: Keys.Date);
         coder.encodeObject(_address, forKey: Keys.Address);
+        coder.encodeObject(_lat, forKey: Keys.Lat);
+        coder.encodeObject(_long, forKey: Keys.Long);
     }
     
     var Item: String {
@@ -119,7 +138,23 @@ class LostItem: NSObject, NSCoding {
         }
     }
     
+    var Lat: String {
+        get {
+            return _lat;
+        }
+        set {
+            _lat = newValue;
+        }
+    }
     
+    var Long: String {
+        get {
+            return _long;
+        }
+        set {
+            _long = newValue;
+        }
+    }
     
     
     
