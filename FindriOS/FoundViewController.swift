@@ -24,7 +24,10 @@ class FoundViewController: UIViewController, UITableViewDataSource, UITableViewD
         // Do any additional setup after loading the view.
     }
     
-    //var foundPlaces = [String: String]()
+    override func viewDidAppear(animated: Bool) {
+        loadData()
+        tableView.reloadData()
+    }
     
     var data = [FoundItem]();
     
@@ -107,7 +110,7 @@ class FoundViewController: UIViewController, UITableViewDataSource, UITableViewD
     
     @IBAction func addFoundItem(sender: AnyObject) {
         
-        let alert = UIAlertController(title: "Add Lost Item" , message: "Enter information about the lost item", preferredStyle: UIAlertControllerStyle.Alert);
+        let alert = UIAlertController(title: "Report Found Item" , message: "Enter information about the found item", preferredStyle: UIAlertControllerStyle.Alert);
         let save = UIAlertAction(title: "Save", style: UIAlertActionStyle.Default) { (UIAlertAction) in
             let item = ((alert.textFields![0] as! UITextField).text)
             let descr = ((alert.textFields![1] as! UITextField).text)
@@ -122,11 +125,8 @@ class FoundViewController: UIViewController, UITableViewDataSource, UITableViewD
             NSUserDefaults.standardUserDefaults().setObject(self.foundPlaces, forKey: "foundPlaces")
             NSUserDefaults.standardUserDefaults().synchronize()
             
-//            let arr = NSUserDefaults.standardUserDefaults().objectForKey("foundPlaces")
-//            print(arr)
             
-            
-            let newItem = FoundItem(item: item, description: descr, status: "Found", date: date, address: address)
+            let newItem = FoundItem(item: item, description: descr, status: "Found", date: date, address: address, lat: lat, long: long)
             
             self.saveData(newItem)
             
@@ -172,16 +172,28 @@ class FoundViewController: UIViewController, UITableViewDataSource, UITableViewD
             
             if let destination = segue.destinationViewController as? EditFoundItemController {
                 
+                destination.path = filePath
+                
                 if searching == true {
                     destination.item = searchData[tableView.indexPathForSelectedRow()!.row].Item
                     destination.descr = searchData[tableView.indexPathForSelectedRow()!.row].Description
                     destination.date = searchData[tableView.indexPathForSelectedRow()!.row].Date
                     destination.loc = searchData[tableView.indexPathForSelectedRow()!.row].Address
+                    destination.lat = searchData[tableView.indexPathForSelectedRow()!.row].Lat
+                    destination.long = searchData[tableView.indexPathForSelectedRow()!.row].Long
+                    destination.index = tableView.indexPathForSelectedRow()!.row
+                    destination.data = searchData
+                    destination.search = true
                 } else {
                     destination.item = data[tableView.indexPathForSelectedRow()!.row].Item
                     destination.descr = data[tableView.indexPathForSelectedRow()!.row].Description
                     destination.date = data[tableView.indexPathForSelectedRow()!.row].Date
                     destination.loc = data[tableView.indexPathForSelectedRow()!.row].Address
+                    destination.lat = data[tableView.indexPathForSelectedRow()!.row].Lat
+                    destination.long = data[tableView.indexPathForSelectedRow()!.row].Long
+                    destination.index = tableView.indexPathForSelectedRow()!.row
+                    destination.data = data
+                    destination.search = false
                 }
             }
             
