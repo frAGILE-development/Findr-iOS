@@ -22,6 +22,11 @@ class LostViewController: UIViewController, UITableViewDataSource, UITableViewDe
         //print(filePath)
         loadData()
     }
+    
+    override func viewDidAppear(animated: Bool) {
+        loadData()
+        tableView.reloadData()
+    }
 
     @IBOutlet weak var searchBar: UISearchBar!
     
@@ -119,12 +124,12 @@ class LostViewController: UIViewController, UITableViewDataSource, UITableViewDe
             let lat = (alert.textFields![4] as! UITextField).text
             let long = ((alert.textFields![5] as! UITextField).text)
             
-            self.lostPlaces[lat] = long
-
-            NSUserDefaults.standardUserDefaults().setObject(self.lostPlaces, forKey: "lostPlaces")
-            NSUserDefaults.standardUserDefaults().synchronize()
+//            self.lostPlaces[lat] = long
+//
+//            NSUserDefaults.standardUserDefaults().setObject(self.lostPlaces, forKey: "lostPlaces")
+//            NSUserDefaults.standardUserDefaults().synchronize()
             
-            let newItem = LostItem(item: item, description: descr, status: "Lost", date: date, address: address)
+            let newItem = LostItem(item: item, description: descr, status: "Lost", date: date, address: address, lat: lat, long: long)
             
             self.saveData(newItem)
             
@@ -179,16 +184,28 @@ class LostViewController: UIViewController, UITableViewDataSource, UITableViewDe
             
             if let destination = segue.destinationViewController as? EditLostItemController {
                 
+                destination.path = filePath
+                
                 if searching == true {
                     destination.item = searchData[tableView.indexPathForSelectedRow()!.row].Item
                     destination.descr = searchData[tableView.indexPathForSelectedRow()!.row].Description
                     destination.date = searchData[tableView.indexPathForSelectedRow()!.row].Date
                     destination.loc = searchData[tableView.indexPathForSelectedRow()!.row].Address
+                    destination.lat = searchData[tableView.indexPathForSelectedRow()!.row].Lat
+                    destination.long = searchData[tableView.indexPathForSelectedRow()!.row].Long
+                    destination.index = tableView.indexPathForSelectedRow()!.row
+                    destination.data = searchData
+                    destination.search = true
                 } else {
                     destination.item = data[tableView.indexPathForSelectedRow()!.row].Item
                     destination.descr = data[tableView.indexPathForSelectedRow()!.row].Description
                     destination.date = data[tableView.indexPathForSelectedRow()!.row].Date
                     destination.loc = data[tableView.indexPathForSelectedRow()!.row].Address
+                    destination.lat = data[tableView.indexPathForSelectedRow()!.row].Lat
+                    destination.long = data[tableView.indexPathForSelectedRow()!.row].Long
+                    destination.index = tableView.indexPathForSelectedRow()!.row
+                    destination.data = data
+                    destination.search = false
                 }
             }
             
